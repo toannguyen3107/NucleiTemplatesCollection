@@ -23,7 +23,8 @@ for url in urls:
     # Convert HTTPS -> SSH
     if url.startswith("https://github.com/"):
         url = url.replace("https://github.com/", "git@github.com:")
-        
+    elif url.startswith("https://gist.github.com/"):
+        url = url.replace("https://gist.github.com/", "git@gist.github.com:")
     parts = url.split('/')
     if len(parts) >= 2:
         owner, repo_name = parts[-2], parts[-1]
