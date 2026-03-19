@@ -20,6 +20,10 @@ with open(repo_file, 'r') as file:
 # Process each repository
 for url in urls:
     # Extract the owner and repo name from the URL
+    # Convert HTTPS -> SSH
+    if url.startswith("https://github.com/"):
+        url = url.replace("https://github.com/", "git@github.com:")
+        
     parts = url.split('/')
     if len(parts) >= 2:
         owner, repo_name = parts[-2], parts[-1]
