@@ -18,7 +18,7 @@ tasks:
   remove_dup_splits:
     desc: Remove duplicate splits
     cmds:
-      - python3 remove_duplicated_templates.py
+      - python3 remove_duplicated_templates_split.py
 
   all:
     desc: Pull templates and remove duplicates
