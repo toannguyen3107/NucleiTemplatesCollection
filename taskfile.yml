@@ -1,0 +1,25 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Default task
+    cmds:
+      - echo "Running default task"
+
+  pull:
+    desc: Pull tamplates
+    cmds:
+      - python bulk_clone_repos.py
+
+  remove_dup_splits:
+    desc: Remove duplicate splits
+    cmds:
+      - python remove_duplicated_templates.py
+  all:
+    cmds:
+      - task: pull
+      - task: remove_dup_splits
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - echo "Cleaning..."
