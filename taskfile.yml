@@ -10,16 +10,22 @@ tasks:
     desc: Pull tamplates
     cmds:
       - python bulk_clone_repos.py
+  gen_nuclei:
+    desc: Generate nuclei templates
+    cmds:
+      - python generate_taskfile.py
 
   remove_dup_splits:
     desc: Remove duplicate splits
     cmds:
       - python remove_duplicated_templates.py
-      
-  combine:
+
+  all:
+    desc: Pull templates and remove duplicates
     cmds:
       - task: pull
       - task: remove_dup_splits
+      - task: gen_nuclei
   clean:
     desc: Clean build artifacts
     cmds:
