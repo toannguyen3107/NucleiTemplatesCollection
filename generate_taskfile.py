@@ -299,10 +299,16 @@ if __name__ == "__main__":
 
     print(f"Found {len(categories)} categories:")
     for cat, parts in sorted(categories.items()):
+        total_files = 0
+        for part in parts:
+            folder = f"{cat}_part{part}"
+            folder_path = os.path.join(args.input, folder)
+            if os.path.exists(folder_path):
+                total_files += len([f for f in os.listdir(folder_path) if f.endswith(('.yml', '.yaml'))])
         if len(parts) > 1:
-            print(f"  {cat}: part{parts}")
+            print(f"  {cat}: {parts} ({total_files} files)")
         else:
-            print(f"  {cat}: {len([p for p in os.listdir(os.path.join(args.input, f'{cat}_part{p}')) if p.endswith(('.yml', '.yaml'))])} files")
+            print(f"  {cat}: {total_files} files")
     print()
 
     generate_taskfile(categories, args.output)
