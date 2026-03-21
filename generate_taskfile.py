@@ -273,7 +273,10 @@ def generate_taskfile(categories, output_file=None):
                 folder = f"{cat}_part{part}"
                 out_name = RATE_LIMITS.get(cat, ("", f"cat_{cat}"))[1]
                 rate_limit = RATE_LIMITS.get(cat, ("-bs 10 -c 15", f"cat_{cat}"))[0]
-                out_file = f"{NUCLEI_OUT}/{out_name}.txt"
+                if len(categories[cat]) > 1:
+                    out_file = f"{NUCLEI_OUT}/{out_name}_part{part}.txt"
+                else:
+                    out_file = f"{NUCLEI_OUT}/{out_name}.txt"
 
                 cmd = f"      - nuclei -t {COLLECTION_DIR}/{folder} -l {{.LIVE_HOSTS}} {severity} -o {out_file} {rate_limit}"
                 lines.append(cmd)
